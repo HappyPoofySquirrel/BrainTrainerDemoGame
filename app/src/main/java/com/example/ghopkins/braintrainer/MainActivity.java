@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     CountDownTimer countDownTimer;
 
-
     public void start(View view) {
         timer.setText("30sec");
         startGame.setVisibility(View.GONE);
@@ -67,13 +66,13 @@ public class MainActivity extends AppCompatActivity {
 public void checkScore(){
     String results;
     if(rightQuestions ==totalQuestions){
-        results= "Perfect score";
+        results= "Perfect score!";
     }
     else if(totalQuestions-rightQuestions<2){
-        results="Good job";
+        results="Good job but you can do better";
     }
     else{
-       results="You may have the downs";
+       results="ALERT ALERT You may have the downs";
     }
     Toast.makeText(getApplicationContext(), results, Toast.LENGTH_LONG).show();
 }
@@ -88,19 +87,19 @@ public void checkScore(){
 
   public void checkAnswer(View view) {
       TextView counter = (TextView) view;
-      String tappedCounter = (counter.getTag().toString()); //ouputs 1,2,3,4(tags of the textviews)
+      String tappedCounter = (counter.getTag().toString());
       int tappedCounterInt = Integer.parseInt(tappedCounter);
 
       if (tappedCounterInt == locationOfCorrectAnswer) {
           Toast.makeText(getApplicationContext(), "RIGHT!", Toast.LENGTH_SHORT).show();
-          rightQuestions +=1;
+          rightQuestions ++;
       }
       else{
           Toast.makeText(getApplicationContext(), "WRONG!", Toast.LENGTH_SHORT).show();
       }
       generateQuestion();
       generateAnswers();
-        totalQuestions +=1;
+        totalQuestions ++;
       right=String.valueOf(rightQuestions);
       total=String.valueOf(totalQuestions);
       score.setText(right + "/" + total);
@@ -108,7 +107,7 @@ public void checkScore(){
 
     public void generateAnswers(){
         locationOfCorrectAnswer =random.nextInt(4);
-        ArrayList<Integer> answers = new ArrayList<Integer>();
+        ArrayList<Integer> answers = new ArrayList<Integer>(); //must be reinstaniated or cleared for fresh answers
         int incorrectAnswer;
 
         for(int i =0; i<=3; i++){
@@ -117,7 +116,6 @@ public void checkScore(){
             }
             else{
                 incorrectAnswer=random.nextInt(101);
-                // answers.add(random.nextInt(101));
 
                 while(incorrectAnswer ==intAnswer){
                     incorrectAnswer=random.nextInt();
@@ -130,6 +128,7 @@ public void checkScore(){
         answer2.setText(Integer.toString(answers.get(2)));
         answer3.setText(Integer.toString(answers.get(3)));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
