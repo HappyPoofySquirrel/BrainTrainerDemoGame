@@ -72,7 +72,7 @@ public void checkScore(){
         results="Good job but you can do better";
     }
     else{
-       results="ALERT ALERT You may have the downs";
+       results="Not good try again";
     }
     Toast.makeText(getApplicationContext(), results, Toast.LENGTH_LONG).show();
 }
